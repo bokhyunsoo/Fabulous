@@ -16,7 +16,7 @@
 <table align="right">
 <tr><td>
 <c:if test="${sessionScope.userid != null }">
-${sessionScope.name}(${sessionScope.userid})님이 로그인중입니다.
+${sessionScope.name}(${sessionScope.userid})님 환영합니다.
 </c:if>
 </td></tr>
 </table>

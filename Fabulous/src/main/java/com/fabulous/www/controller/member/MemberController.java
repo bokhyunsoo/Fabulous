@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,4 +51,20 @@ public class MemberController {
 		mav.addObject("message", "logout");
 		return mav;
 	}
+	
+	@RequestMapping("join.do")
+	public String join() {
+		return "member/join";
+	}
+	
+	@RequestMapping("insert.do")
+	public ModelAndView insertMember(@ModelAttribute MemberDTO dto, ModelAndView mav) {
+		
+		memberService.inserMember(dto);
+		
+		mav.setViewName("member/login");
+		mav.addObject("message", "success");
+		return mav;
+	}
+	
 }

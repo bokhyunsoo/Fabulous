@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<!-- 세션을 사용하지 않는 옵션 -->
+<%@ page session="true" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,6 +13,16 @@
 <%@ include file="include/menu.jsp" %>
 
 <div class="container" id="main">
+<table align="right">
+<tr><td>
+<c:if test="${sessionScope.userid != null }">
+${sessionScope.name}(${sessionScope.userid})님이 로그인중입니다.
+</c:if>
+</td></tr>
+</table>
+<br>
+<br>
+<br>
    <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
       <div class="panel panel-default qna-list">
           <ul class="list">

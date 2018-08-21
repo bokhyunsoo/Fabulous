@@ -5,9 +5,7 @@
 <nav class="navbar navbar-fixed-top header">
     <div class="col-md-12">
         <div class="navbar-header">
-
             <a href="${path}" class="navbar-brand">Fabulous</a>
-
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse1">
             <form class="navbar-form pull-left">
@@ -35,8 +33,7 @@
                 <li><a href="${path}/admin/login.do">관리자 로그인</a></li>
                 </c:when>
                 <c:otherwise>
-                ${sessionScope.name}님이 로그인중입니다.
-                <li><a href="" role="button">로그아웃</a></li>
+                <li><a href="${path}/member/logout.do" role="button">로그아웃</a></li>
                 <li><a href="" role="button">개인정보수정</a></li>
                 </c:otherwise>
 			</c:choose>

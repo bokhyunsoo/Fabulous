@@ -23,7 +23,7 @@
               <c:forEach var="row" items="${list}">
                 <tr>
                     <th scope="row">${row.product_id}</th>
-                    <td><img src="${path}/images/${row.picture_url}" width="100px" height="100px"></td>
+                    <td><img src="${path}/images/${row.picture_url}" width="150px" height="150px"></td>
                     <td><a href="${path}/shop/product/detail/${row.product_id}">${row.product_name}</a></td>
                     <td><fmt:formatNumber value="${row.price}" pattern="#,###"/></td>
                 </tr>

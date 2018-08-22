@@ -56,7 +56,6 @@
 				</tr>
 				<tr>
 				<td colspan="2">
-					
 					<input type="hidden" name="product_id" value="${dto.product_id}">
 					<button type="submit" class="btn btn-success clearfix pull-right">장바구니에 담기</button>
               		<div class="clearfix" />

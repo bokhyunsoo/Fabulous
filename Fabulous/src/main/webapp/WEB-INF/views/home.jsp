@@ -66,6 +66,7 @@ ${sessionScope.name}(${sessionScope.userid})님 환영합니다.
 </div>
 
 <%@ include file="include/footer.jsp" %>
-
+<!-- 실제로 서비스되는 디렉토리(배포 디렉토리) -->
+<%=application.getRealPath("/") %>
 </body>
 </html>

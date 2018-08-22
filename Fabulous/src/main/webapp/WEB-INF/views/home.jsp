@@ -11,7 +11,6 @@
 </head>
 <body>
 <%@ include file="include/menu.jsp" %>
-
 <div class="container" id="main">
 <table align="right">
 <tr><td>

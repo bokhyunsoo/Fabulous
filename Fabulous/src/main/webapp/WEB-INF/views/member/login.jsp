@@ -39,8 +39,11 @@ function checkValue()
       <div class="alert alert-danger" role="alert" style="color:red;">로그아웃 처리되었습니다.</div>
       </c:if>
       <c:if test="${message == 'success'}">
-      <div class="alert alert-danger" role="alert" style="color:red;">회원가입이 되셨으니 로그인해주세요.</div>
-      </c:if>
+		<script>
+		alert("회원가입이 완료되었습니다.");
+		</script>
+		<div class="alert alert-danger" role="alert" style="color:red;">회원가입이 완료되었습니다. 로그인 해주세요.</div>
+	  </c:if>
           <form name="loginInfo" method="post" action="${path}/member/login_check.do" onsubmit="return checkValue()">
               <div class="form-group">
                   <label for="userId">사용자 아이디</label>

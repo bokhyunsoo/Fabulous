@@ -34,6 +34,7 @@
                 </c:when>
                 <c:otherwise>
                 <li><a href="${path}/shop/product/list.do" role="button">상품목록</a></li>
+                <li><a href="${path}/shop/cart/list.do" role="button">장바구니</a></li>
                 <li><a href="${path}/member/logout.do" role="button">로그아웃</a></li>
                 <li><a href="" role="button">개인정보수정</a></li>
                 </c:otherwise>

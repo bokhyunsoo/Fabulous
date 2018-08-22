@@ -41,12 +41,12 @@
                <tr>
                     <th>사이즈</th>
                     <td>&nbsp;&nbsp;
-                    <select name="size">
-							<option value="00">SIZE</option>
-							<option value="01">S</option>
-							<option value="02">M</option>
-							<option value="03">L</option>
-							<option value="04">XL</option>
+                    <select name="measurement">
+							<option value="사이즈 미선택">SIZE</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+							<option value="XL">XL</option>
 					</select>
 					</td>
                </tr>

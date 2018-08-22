@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="include/menu.jsp" %>
-<div class="container" id="main">
+<br><br><br><br><br><br><br>
 <table align="right">
 <tr><td>
 <c:if test="${sessionScope.userid != null }">
@@ -19,9 +19,7 @@ ${sessionScope.name}(${sessionScope.userid})님 환영합니다.
 </c:if>
 </td></tr>
 </table>
-<br>
-<br>
-<br>
+<div class="container" id="main">
    <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
       <div class="panel panel-default qna-list">
           <ul class="list">

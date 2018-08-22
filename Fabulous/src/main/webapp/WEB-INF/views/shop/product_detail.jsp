@@ -14,6 +14,7 @@
 <div class="container" id="main">
    <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
+      <form name="form1" method="post" action="${path}/shop/cart/insert.do">
           <table class="table table-hover">
               <tr>
               <td width="600"><img src="${path}/images/${dto.picture_url}" width="500" height="300"></td>
@@ -41,12 +42,12 @@
                <tr>
                     <th>사이즈</th>
                     <td>&nbsp;&nbsp;
-                    <select name="measurement">
-							<option value="사이즈 미선택">SIZE</option>
-							<option value="S">S</option>
-							<option value="M">M</option>
-							<option value="L">L</option>
-							<option value="XL">XL</option>
+                    <select name="ms">
+							<option value="0">SIZE</option>
+							<option value="1">S</option>
+							<option value="2">M</option>
+							<option value="3">L</option>
+							<option value="4">XL</option>
 					</select>
 					</td>
                </tr>
@@ -55,14 +56,17 @@
 				</tr>
 				<tr>
 				<td colspan="2">
+					
 					<input type="hidden" name="product_id" value="${dto.product_id}">
-					<a href="${path}/shop/cart/insert.do" class="btn btn-success" role="button">장바구니에 담기</a>
+					<button type="submit" class="btn btn-success clearfix pull-right">장바구니에 담기</button>
+              		<div class="clearfix" />
 				</td>
 				</tr>
 				</table>
 				</td>
 				</tr>
 			</table>
+			</form>
 			<table class="table table-hover">
 			<tr align="center">
 			<td><img src="${path}/images/${dto.description}" width="660"></td></td>

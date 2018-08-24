@@ -32,6 +32,9 @@ function checkValue()
 <div class="container" id="main">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default content-main">
+      <c:if test="${param.message == 'nologin'}">
+      <div class="alert alert-danger" role="alert" style="color:red;">로그인하신 후 이용하세요.</div>
+      </c:if>
       <c:if test="${message == 'error'}">
       <div class="alert alert-danger" role="alert" style="color:red;">아이디 또는 비밀번호가 일치하지 않거나 입력하지 않은 항목이 있습니다.</div>
       </c:if>

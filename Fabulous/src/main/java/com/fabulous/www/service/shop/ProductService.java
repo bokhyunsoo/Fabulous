@@ -11,4 +11,5 @@ public interface ProductService {
 	void deleteProduct(int product_id);
 	void insertProduct(ProductDTO dto);
 	String fileInfo(int product_id);
+	String descriptionInfo(int product_id);
 }

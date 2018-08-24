@@ -12,6 +12,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detail_product" resultType="productDto">
 		select * from product where product_id=#{product_id}
 	</select>
+	
+	<update id="update_product">
+		update product set product_name = #{product_name}, price = #{price},
+		description = #{description}, picture_url = #{picture_url}
+		where product_id = #{product_id}
+	</update>
+	
+	<insert id="insert">
+		insert into product values (seq_product.nextval, #{product_name}, #{price}, #{description}, #{picture_url})
+	</insert>
+	
+	<delete id="delete">
+		delete from product where product_id=#{product_id}
+	</delete>
+	
+	<select id="file_info" resultType="String">
+		select picture_url from product where product_id=#{product_id}
+	</select>
+	
+	<select id="description_info" resultType="String">
+		select description from product where product_id=#{product_id}
+	</select>
 </mapper>
 
 

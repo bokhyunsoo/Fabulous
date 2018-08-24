@@ -28,12 +28,10 @@
             <ul class="nav navbar-nav navbar-right">
             <c:choose>
 				<c:when test="${sessionScope.admin_userid == null}">
-				<li><a href="${path}/shop/product/list.do" role="button">상품목록</a></li>
-                <li><a href="${path}/member/login.do" role="button">로그인</a></li>
-                <li><a href="${path}/member/join.do" role="button">회원가입</a></li>
                 <li><a href="${path}/admin/login.do">관리자 로그인</a></li>
                 </c:when>
                 <c:otherwise>
+                <li><a href="${path}/pdf/list.do" role="button">PDF</a></li>
                 <li><a href="${path}/chart/chart1.do" role="button">구글차트(json)</a></li>
                 <li><a href="${path}/chart/chart2.do" role="button">구글차트(db)</a></li>
                 <li><a href="${path}/jchart/chart1.do" role="button">JFreeChart(png)</a></li>

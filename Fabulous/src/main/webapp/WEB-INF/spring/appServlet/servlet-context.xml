@@ -23,7 +23,8 @@
 	<resources location="/WEB-INF/views/include/" mapping="/include/**" />
 	<resources location="/WEB-INF/views/images/" mapping="/images/**" />
 	<resources location="/WEB-INF/views/json/" mapping="/json/**" />
-
+	<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**" />
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
@@ -67,6 +68,10 @@
 			</interceptor>
 	<!-- 로그인 체크를 위한 인터셉터 mapping -->
 			<interceptor>
+				<mapping path="/board/write.do"/>
+				<mapping path="/board/insert.do"/>
+				<mapping path="/board/update.do"/>
+				<mapping path="/board/delete.do"/>
 				<mapping path="/shop/cart/insert.do"/>
 				<mapping path="/shop/cart/list.do"/>
 				<mapping path="/shop/product/list.do"/>

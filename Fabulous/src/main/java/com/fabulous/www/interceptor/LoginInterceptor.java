@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -20,5 +21,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		return true; // 메인액션으로 넘어감
 	}
+
+	// preHandle() => write.do => postHandle()
+	// 요청이 완료된 후 실행
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		// TODO Auto-generated method stub
+		super.postHandle(request, response, handler, modelAndView);
+	}
+	
+	
 	
 }

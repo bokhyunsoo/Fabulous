@@ -27,13 +27,15 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("list.do")
-	public ModelAndView list(String search_option, String keyword) throws Exception {
+	public ModelAndView list(@RequestParam(defaultValue="all") String search_option, @RequestParam(defaultValue="") String keyword) throws Exception {
 		int start = 0;
 		int end = 0;
 		List<BoardDTO> list = boardService.listAll(start, end, search_option, keyword);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
 		Map<String,Object> map = new HashMap<>();
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
 		map.put("list", list);
 		map.put("count", list.size());
 		mav.addObject("map", map);

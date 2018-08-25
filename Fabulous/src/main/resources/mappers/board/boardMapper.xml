@@ -7,9 +7,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="board">
 	<select id="listAll" resultType="com.fabulous.www.model.board.dto.BoardDTO">
 		select bno, title, b.regdate, viewcnt, name
-		from board b, member m where b.writer = m.userId
+		from board b, member m <include refid="search"/>
 		order by bno desc, regdate desc
 	</select>
+	
+	<!-- #변수 - 따옴표를 처리(스트링 붙이고 숫자는 빼고)
+	$변수 - 따옴표를 무시 -->
+	
+	<sql id="search">
+		<choose>
+			<when test="search_option == 'all'">
+				where b.writer = m.userId and (name like '%' || #{keyword} || '%'
+				or content like '%' || #{keyword} || '%'
+				or title like '%' || #{keyword} || '%' )
+			</when>
+			<otherwise>
+				where b.writer = m.userId and ${search_option} like '%' || #{keyword} || '%'
+			</otherwise>
+		</choose>
+	</sql>
 	
 	<insert id="insert">
 		insert into board (bno, title, content, writer) values

@@ -3,6 +3,7 @@ package com.fabulous.www.service.board;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -34,8 +35,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardDTO read(int bno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.read(bno);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void increaseViewcnt(int bno) {
+	public void increaseViewcnt(int bno, HttpSession session) {
 		// TODO Auto-generated method stub
 
 	}

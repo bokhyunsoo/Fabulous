@@ -47,6 +47,24 @@
 	</bean>
 	<!-- 트랜잭션 관련 어노테이션을 인식하는 자동으로 인식하도록 설정 -->
 	<tx:annotation-driven/>
+	
+	<!-- 이메일 발송 bean 설정 -->
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		id="mailSender">
+		<property value="smtp.gmail.com" name="host" />
+		<property value="587" name="port" />
+		<property value="bokhyunsoo120@gmail.com" name="username" />
+		<property value="skagh0430!!" name="password" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
 </beans>
 
 

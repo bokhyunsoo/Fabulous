@@ -27,6 +27,7 @@
             <ul class="nav navbar-nav navbar-right">
             <c:choose>
 				<c:when test="${sessionScope.userid == null}">
+				<li><a href="${path}/upload/uploadAjax" role="button">업로드 테스트(ajax)</a></li>
 				<li><a href="${path}/shop/product/list.do" role="button">상품목록</a></li>
                 <li><a href="${path}/member/login.do" role="button">로그인</a></li>
                 <li><a href="${path}/member/join.do" role="button">회원가입</a></li>

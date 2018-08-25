@@ -7,6 +7,22 @@
 <title>Insert title here</title>
 <%@ include file="../include/header.jsp" %>
 <script src="${path}/ckeditor/ckeditor.js"></script>
+<script>
+$(function(){
+	$("#btnUpdate").click(function(){
+		document.form1.action="${path}/board/update.do";
+		document.form1.submit();
+	});
+});
+$(function(){
+	$("#btnDelete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			document.form1.action="${path}/board/delete.do";
+			document.form1.submit();
+		}
+	});
+});
+</script>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
@@ -39,8 +55,10 @@
 		<table align="center">
 		<tr><td>
 		<input type="hidden" name="bno" value="${dto.bno}">
+		<c:if test="${sessionScope.userid == dto.writer}">
 		<button type="button" id="btnUpdate" class="btn btn-success">수정</button>
 		<button type="button" id="btnDelete" class="btn btn-success">삭제</button>
+		</c:if>
 		<button type="button" id="btnList" class="btn btn-success">목록</button>
       	</td></tr>
       	</table>

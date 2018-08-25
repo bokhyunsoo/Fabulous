@@ -20,6 +20,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select bno, title, b.regdate, content, viewcnt, name, writer
 		from board b, member m where b.writer = m.userId and bno=#{bno}
 	</select>
+	
+	<update id="increaseViewcnt">
+		update board set viewcnt = viewcnt + 1 where bno = #{bno}
+	</update>
+	
+	<update id="updateArticle">
+		update board set title=#{title}, content=#{content} where bno=#{bno}
+	</update>
+	
+	<delete id="deleteArticle">
+		delete from board where bno=#{bno}
+	</delete>
 </mapper>
 
 

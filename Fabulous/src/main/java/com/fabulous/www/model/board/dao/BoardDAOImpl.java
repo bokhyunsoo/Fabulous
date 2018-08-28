@@ -66,6 +66,8 @@ public class BoardDAOImpl implements BoardDAO {
 		Map<String,Object> map = new HashMap<>();
 		map.put("search_option", search_option);
 		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
 		return sqlSession.selectList("board.listAll", map);
 	}
 
@@ -76,8 +78,10 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int countArticle(String search_option, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		Map<String,Object> map = new HashMap<>();
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne("board.countArticle", map);
 	}
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fabulous.www.model.board.dto.BoardDTO;
 import com.fabulous.www.service.board.BoardService;
+import com.fabulous.www.service.board.Pager;
 
 @Controller
 @RequestMapping("/board/*")
@@ -27,15 +28,20 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("list.do")
-	public ModelAndView list(@RequestParam(defaultValue="all") String search_option, @RequestParam(defaultValue="") String keyword) throws Exception {
-		int start = 0;
-		int end = 0;
+	public ModelAndView list(@RequestParam(defaultValue="1") int curPage, @RequestParam(defaultValue="all") String search_option, @RequestParam(defaultValue="") String keyword) throws Exception {
+		// 레코드 갯수 계산
+		int count = boardService.countArticle(search_option, keyword);
+		// 페이지의 시작번호, 끝번호 계산
+		Pager pager = new Pager(count,curPage);
+		int start = pager.getPageBegin();
+		int end = pager.getPageEnd();
 		List<BoardDTO> list = boardService.listAll(start, end, search_option, keyword);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
 		Map<String,Object> map = new HashMap<>();
 		map.put("search_option", search_option);
 		map.put("keyword", keyword);
+		map.put("pager", pager);
 		map.put("list", list);
 		map.put("count", list.size());
 		mav.addObject("map", map);

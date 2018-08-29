@@ -10,12 +10,48 @@
 <script src="${path}/ckeditor/ckeditor.js"></script>
 <script>
 $(function(){
+	
+	listAttach(); // 첨부파일 목록 로딩
+	
+	//댓글 목록 출력
+	listReply("1");
+	
+	function listReply(num){
+		$.ajax({
+			type : "get",
+			url : "${path}/reply/list.do?bno=${dto.bno}&curPage="+num,
+			success : function(result){
+				// 컨트롤러에서 뷰로 포워딩되어 출력된 responseText를
+				// id가 listReply인 태그의 innerHTML 영역에 출력시킴
+				$("#listReply").html(result);
+			}
+		});
+	}
+	
 	//목록 버튼 클릭
 	$("#btnList").click(function(){
 		location.href="${path}/board/list.do";
 	});
 	
-	listAttach(); // 첨부파일 목록 로딩
+	$("#btnReply").click(function(){
+		Reply();
+	});
+	
+	function Reply(){
+		var replytext = $("#replytext").val(); // 댓글 내용
+		var bno = "${dto.bno}"; // 게시물 번호
+		// var param = "replytext="+replytext+"&bno="+bno;
+		var param = {"replytext": replytext, "bno": bno};
+		$.ajax({
+			type : "post",
+			url : "${path}/reply/insert.do",
+			data : param,
+			success : function(){ // 콜백 함수
+				alert("댓글이 등록되었습니다.");
+				listReply("1")
+			}
+		});
+	}
 	
 	//드래그 기본효과 막음
 	$(".fileDrop").on("dragenter dragover",function(e){
@@ -118,7 +154,14 @@ function listAttach(){
 	height: 100px;
 	border: 1px dotted gray;
 	background-color: gray;
+	
 }
+
+.my-hr1 {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+  }
 </style>
 </head>
 <body>
@@ -150,16 +193,30 @@ function listAttach(){
 		</tr>
 		</table>
 		<!-- 첨부파일 목록 -->
-		<div align="center">첨부파일</div>
+		<div align="center"><H4>첨부파일</H4></div>
 		<br>
 		<!-- 첨부파일을 드래그할 영역 -->
 		<c:if test="${sessionScope.userid == dto.writer}">
         <center><div class="fileDrop"></div></center>
         </c:if>
 		<div id="uploadedList" align="center"></div><br>
+		<hr class="my-hr1">
+		<div align="center"><H4>댓글</H4></div>
+		<!-- 댓글 작성폼 -->
+		<div align="center">
+		<c:if test="${sessionScope.userid != null}">
+			<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
+			<br>
+			<button type="button" id="btnReply" class="btn btn-success">댓글쓰기</button>
+		</c:if>
+		</div>
+		<br>
+		<!-- 댓글 목록을 출력할 영역 -->
+		<div id="listReply" align="center"></div>
 		<table align="center">
 		<tr><td>
 		<input type="hidden" name="bno" value="${dto.bno}">
+		<br><br>
 		<c:if test="${sessionScope.userid == dto.writer}">
 		<button type="button" id="btnUpdate" class="btn btn-success">수정</button>
 		<button type="button" id="btnDelete" class="btn btn-success">삭제</button>

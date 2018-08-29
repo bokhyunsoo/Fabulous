@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -19,21 +20,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fabulous.www.service.board.BoardService;
 import com.fabulous.www.util.MediaUtils;
 import com.fabulous.www.util.UploadFileUtils;
 
 @Controller
 public class AjaxUploadController {
+private static final Logger logger = LoggerFactory.getLogger(AjaxUploadController.class);
 	
-	private static final Logger logger = LoggerFactory.getLogger(AjaxUploadController.class);
- 	// servlet-context.xml에 선언된 값
+	@Inject
+	BoardService boardService;
+	
+	// servlet-context.xml에 선언된 값
 	@Resource(name = "uploadPath")
 	String uploadPath;
- 	@RequestMapping(value = "/upload/uploadAjax", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/upload/uploadAjax", method = RequestMethod.GET)
 	public void uploadAjax() {
 		// views/upload/uploadAjax.jsp로 이동
 	}
- 	// 업로드한 파일은 MultipartFile 변수에 저장됨
+
+	// 업로드한 파일은 MultipartFile 변수에 저장됨
 	@ResponseBody // json 형식으로 리턴
 	@RequestMapping(value = "/upload/uploadAjax", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
@@ -58,6 +65,7 @@ public class AjaxUploadController {
 		ResponseEntity<byte[]> entity = null;
 		try {
 			// 확장자 검사
+			// test.jpg	a.b.c.d.jpg
 			String formatName = fileName.substring(
 					fileName.lastIndexOf(".") + 1);
 			MediaType mType = MediaUtils.getMediaType(formatName);
@@ -69,10 +77,10 @@ public class AjaxUploadController {
 //				headers.setContentType(mType);
 //			} else { // 이미지가 아니면
 				fileName = fileName.substring(
-						fileName.indexOf("_") + 1);
+						fileName.indexOf("_") + 1); // uuid를 제외한 파일 이름
 				// 다운로드용 컨텐트 타입
 				headers.setContentType(
-						MediaType.APPLICATION_OCTET_STREAM);
+						MediaType.APPLICATION_OCTET_STREAM); // 컨텐트 타입
 				// 큰 따옴표 내부에 " \" "
 				// 바이트배열을 스트링으로
 				// iso-8859-1 서유럽언어
@@ -80,7 +88,7 @@ public class AjaxUploadController {
 				headers.add("Content-Disposition",
 						"attachment; filename=\"" 
 								+ new String(
-fileName.getBytes("utf-8"), "iso-8859-1") + "\"");
+fileName.getBytes("utf-8"), "iso-8859-1") + "\""); // 첨부파일정보
 				// headers.add("Content-Disposition"
 				// ,"attachment; filename='"+fileName+"'");
 //			}
@@ -105,20 +113,20 @@ fileName.getBytes("utf-8"), "iso-8859-1") + "\"");
 		logger.info("fileName:"+fileName); 
 		//확장자 검사
 		String formatName=fileName.substring(
-				fileName.lastIndexOf(".")+1);
+				fileName.lastIndexOf(".")+1);//확장자 검사
 		MediaType mType=MediaUtils.getMediaType(formatName);
 		if(mType != null) { //이미지 파일이면 원본이미지 삭제
 			String front=fileName.substring(0, 12);
 			String end=fileName.substring(14);
 // 		File.separatorChar : 유닉스 / 윈도우즈\	
 			new File(uploadPath+(front+end).replace(
-					'/',File.separatorChar)).delete();
+					'/',File.separatorChar)).delete();// 썸네일 삭제
 		}
 		//원본 파일 삭제(이미지이면 썸네일 삭제)
 		new File(uploadPath+fileName.replace(
-				'/',File.separatorChar)).delete();
+				'/',File.separatorChar)).delete(); // 파일 삭제
 		//레코드 삭제
-		
+		boardService.deleteFile(fileName);
 		return new ResponseEntity<String>("deleted"
 				,HttpStatus.OK);
 	}

@@ -71,6 +71,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addAttach">
 		insert into attch (fullName, bno) values (#{fullName}, seq_board.currval)
 	</insert>
+	
+	<select id="getAttach" resultType="String">
+		select fullName from attch where bno=#{bno} order by regdate
+	</select>
+	
+	<delete id="deleteAttach">
+		delete from attch where fullName=#{fullName}
+	</delete>
+	
+	<insert id="updateAttach">
+		insert into attch (fullName, bno) values (#{fullName}, #{bno})
+	</insert>
 </mapper>
 
 

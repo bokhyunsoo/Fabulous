@@ -34,15 +34,15 @@ $(function(){
 			processData : false,
 			contentType : false,
 			type : "post",
-			success : function(data){
+			success : function(data){ // 콜백함수
 				// console.log(data);
 				// data : 업로드한 파일 정보와 Http 상태 코드
-				var fileInfo = getFileInfo(data);
+				var fileInfo = getFileInfo(data); // 첨부 파일 정보
 				// console.log(fileInfo);
 				
-				var html = "<a href='"+fileInfo.getLink+"'>" + fileInfo.fileName+"</a><br>";
-				html += "<input type='hidden' class='file' value='"+fileInfo.fullName+"'>";
-				$("#uploadedList").append(html);
+				var html = "<a href='"+fileInfo.getLink+"'>" + fileInfo.fileName+"</a><br>"; // 첨부 파일 링크
+				html += "<input type='hidden' class='file' value='"+fileInfo.fullName+"'>"; // hidden 태그 추가
+				$("#uploadedList").append(html); // div에 추가
 			}
 		});
 	});
@@ -95,7 +95,7 @@ $(function(){
 		});
 		</script>
               </div>
-              <div>
+              <div align="center">
               		첨부파일을 등록하세요
               		<!-- 첨부파일을 드래그할 영역 -->
               		<div class="fileDrop"></div>

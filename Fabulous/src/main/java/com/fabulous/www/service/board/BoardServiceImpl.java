@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fabulous.www.model.board.dao.BoardDAO;
 import com.fabulous.www.model.board.dto.BoardDTO;
@@ -27,10 +28,17 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Transactional
 	@Override
 	public void create(BoardDTO dto) throws Exception {
 		boardDao.create(dto);
+		// 첨부파일 정보 저장
+		String[] files = dto.getFiles();
+		if(files==null) return; // 첨부파일이 없으면 리턴
+		for (String name : files) {
+			boardDao.addAttach(name);
+		}
 	}
 
 	@Override

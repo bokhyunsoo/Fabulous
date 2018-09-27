@@ -157,6 +157,19 @@ $(function(){
 });
 $(function(){
 	$("#btnDelete").click(function(){
+		
+		var Replycount = "${Replycount}";
+		if(Replycount > 0){
+			alert("댓글이 있는 게시물은 삭제할 수 없습니다.")
+			return;
+		}
+		
+		var Attachcount = "${Attachcount}";
+		if(Attachcount > 0){
+			alert("첨부파일이 있는 게시물은 삭제할 수 없습니다.")
+			return;
+		}
+		
 		if(confirm("삭제하시겠습니까?")){
 			document.form1.action="${path}/board/delete.do";
 			document.form1.submit();

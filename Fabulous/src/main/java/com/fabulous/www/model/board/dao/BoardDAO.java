@@ -19,4 +19,5 @@ public interface BoardDAO {
 	public void increaseViewcnt(int bno); // 조회수 증가
 	// 레코드 갯수 계산
 	public int countArticle(String search_option, String keyword) throws Exception;
+	public int Attachcount(int bno);
 }

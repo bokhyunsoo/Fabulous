@@ -17,4 +17,5 @@ public interface BoardService {
 	public void increaseViewcnt(int bno, HttpSession session) throws Exception; // 조회수 증가
 	// 레코드 갯수 계산
 	public int countArticle(String search_option, String keyword) throws Exception;
+	public int Attachcount(int bno);
 }

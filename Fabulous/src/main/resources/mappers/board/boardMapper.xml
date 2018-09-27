@@ -85,6 +85,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="updateAttach">
 		insert into attch (fullName, bno) values (#{fullName}, #{bno})
 	</insert>
+	
+	<select id="attachCount" resultType="int">
+		select count(*)
+		from attch
+		where bno = #{bno}
+	</select>
 </mapper>
 
 

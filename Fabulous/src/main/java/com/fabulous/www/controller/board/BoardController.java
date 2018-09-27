@@ -83,6 +83,8 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/view");
 		mav.addObject("dto", boardService.read(bno));
+		mav.addObject("Replycount", replyService.count(bno));
+		mav.addObject("Attachcount", boardService.Attachcount(bno));
 		return mav;
 	}
 	

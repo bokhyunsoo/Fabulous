@@ -83,4 +83,9 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("board.countArticle", map);
 	}
 
+	@Override
+	public int Attachcount(int bno) {
+		return sqlSession.selectOne("board.attachCount", bno);
+	}
+
 }

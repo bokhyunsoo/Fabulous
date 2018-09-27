@@ -89,4 +89,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.countArticle(search_option, keyword);
 	}
 
+	@Override
+	public int Attachcount(int bno) {
+		return boardDao.Attachcount(bno);
+	}
+
 }

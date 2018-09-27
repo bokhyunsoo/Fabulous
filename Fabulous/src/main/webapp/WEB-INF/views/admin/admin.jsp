@@ -19,7 +19,6 @@
 </td></tr>
 </table>
 
-
 <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

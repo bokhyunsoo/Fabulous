@@ -49,10 +49,13 @@ src="https://www.google.com/jsapi"></script>
 </head>
 <body>
 <%@ include file="../include/admin_menu.jsp" %>
-<div id="chart_div"></div>
-<button id="btn" type="button" onclick="drawChart()">
+<br><br><br><br><br><br><br><br>
+<div id="chart_div" align="center"></div>
+<br>
+<div align="center">
+<button id="btn" type="button" onclick="drawChart()" class="btn btn-success">
 refresh</button>
-
+</div>
 <%@ include file="../include/footer.jsp" %>
 
 </body>

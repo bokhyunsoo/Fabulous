@@ -10,7 +10,7 @@ public class ReplyDTO {
 	private String name;
 	private Date regdate; // java.util.Date
 	private Date updatedate;
-	private String secret_reply;
+	private String secretReply;
 	private String writer;
 	public int getRno() {
 		return rno;
@@ -54,11 +54,11 @@ public class ReplyDTO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
-	public String getSecret_reply() {
-		return secret_reply;
+	public String getSecretReply() {
+		return secretReply;
 	}
-	public void setSecret_reply(String secret_reply) {
-		this.secret_reply = secret_reply;
+	public void setSecretReply(String secretReply) {
+		this.secretReply = secretReply;
 	}
 	public String getWriter() {
 		return writer;
@@ -69,7 +69,7 @@ public class ReplyDTO {
 	@Override
 	public String toString() {
 		return "ReplyDTO [rno=" + rno + ", bno=" + bno + ", replytext=" + replytext + ", replyer=" + replyer + ", name="
-				+ name + ", regdate=" + regdate + ", updatedate=" + updatedate + ", secret_reply=" + secret_reply
+				+ name + ", regdate=" + regdate + ", updatedate=" + updatedate + ", secretReply=" + secretReply
 				+ ", writer=" + writer + "]";
 	}
 }

@@ -9,8 +9,16 @@
 	
 </head>
 <body>
+<c:choose>
+<c:when test="${sessionScope.admin_userid == null}">
 <%@ include file="../include/menu.jsp" %>
+</c:when>
+<c:otherwise>
+<%@ include file="../include/admin_menu.jsp" %>
+</c:otherwise>
+</c:choose>
 
+<br><br>
 <div class="container" id="main">
    <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
@@ -37,18 +45,6 @@
 								<option value="${i}">${i}</option>
 							</c:forEach>
 						</select>
-					</td>
-               </tr>
-               <tr>
-                    <th>사이즈</th>
-                    <td>&nbsp;&nbsp;
-                    <select name="ms">
-							<option value="0">SIZE</option>
-							<option value="1">S</option>
-							<option value="2">M</option>
-							<option value="3">L</option>
-							<option value="4">XL</option>
-					</select>
 					</td>
                </tr>
                <tr>

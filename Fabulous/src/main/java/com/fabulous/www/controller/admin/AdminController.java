@@ -31,12 +31,22 @@ public class AdminController {
 			session.setAttribute("admin_name", name);
 			session.setAttribute("userid", dto.getUserId());
 			session.setAttribute("name", name);
-			mav.setViewName("admin/admin");
-			mav.addObject("message", "success");
+			mav.setViewName("redirect:/");
 		} else {
 			mav.setViewName("admin/login");
 			mav.addObject("message", "error");
 		}
+		return mav;
+	}
+	
+	@RequestMapping("logout.do")
+	public ModelAndView logout(HttpSession session, ModelAndView mav) {
+		//세션 초기화
+		adminService.logout(session);
+//		session.invalidate();
+		// login.jsp로 이동
+		mav.setViewName("admin/login");
+		mav.addObject("message", "logout");
 		return mav;
 	}
 }

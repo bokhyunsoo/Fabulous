@@ -68,7 +68,7 @@ public class PdfServiceImpl implements PdfService {
 			table.addCell(cell3);
 			table.addCell(cell4);
 			
-			List<CartDTO> items = cartService.listCart("aa");
+			List<CartDTO> items = cartService.listCart("test");
 			for(int i=0; i<items.size(); i++) {
 				CartDTO dto = items.get(i);
 				PdfPCell cellProductName = new PdfPCell(new Phrase(dto.getProduct_name(), font)); // 상품명

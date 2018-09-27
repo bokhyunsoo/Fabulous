@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fabulous.www.model.board.dto.BoardDTO;
 import com.fabulous.www.service.board.BoardService;
 import com.fabulous.www.service.board.Pager;
+import com.fabulous.www.service.board.ReplyService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -28,6 +29,9 @@ public class BoardController {
 	
 	@Inject
 	BoardService boardService;
+	
+	@Inject
+	ReplyService replyService;
 	
 	// REST방식의 url {bno} => PathVariable로 선언
 	@RequestMapping("getAttach/{bno}")

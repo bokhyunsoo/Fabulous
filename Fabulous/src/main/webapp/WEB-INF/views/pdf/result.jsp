@@ -8,9 +8,9 @@
 <%@ include file="../include/header.jsp" %>
 </head>
 <body>
-<%@ include file="../include/menu.jsp" %>
-<br><br><br><br><br><br><br>
-<h2>${message}</h2>
+<%@ include file="../include/admin_menu.jsp" %>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<h2 align="center">${message}</h2>
 
 <%@ include file="../include/footer.jsp" %>
 </body>

@@ -8,14 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 장바구니 목록 -->
 	<select id="listCart" resultType="com.fabulous.www.model.shop.dto.CartDTO">
-		select cart_id, m.userId, name, p.product_id, product_name, amount, ms, price, price*amount money
+		select cart_id, m.userId, name, p.product_id, product_name, amount, price, price*amount money
 		from member m, cart c, product p where m.userId = c.userId and p.product_id = c.product_id
 		and m.userId=#{userId}
 	</select>
 	
 	<!-- 장바구니 담기 -->
 	<insert id="insert">
-		insert into cart (cart_id, userId, product_id, ms, amount) values (cart_seq.nextval, #{userId}, #{product_id}, #{ms}, #{amount})
+		insert into cart (cart_id, userId, product_id, amount) values (cart_seq.nextval, #{userId}, #{product_id}, #{amount})
 	</insert>
 	
 	<!-- 장바구니 수정 -->

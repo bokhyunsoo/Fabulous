@@ -8,7 +8,6 @@ public class CartDTO {
 	private String product_name;
 	private int price;
 	private int money;
-	private int ms;
 	private int amount;
 	
 	public int getCart_id() {
@@ -53,12 +52,6 @@ public class CartDTO {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	public int getMs() {
-		return ms;
-	}
-	public void setMs(int ms) {
-		this.ms = ms;
-	}
 	public int getAmount() {
 		return amount;
 	}
@@ -68,7 +61,7 @@ public class CartDTO {
 	@Override
 	public String toString() {
 		return "CartDTO [cart_id=" + cart_id + ", userId=" + userId + ", name=" + name + ", product_id=" + product_id
-				+ ", product_name=" + product_name + ", price=" + price + ", money=" + money + ", ms=" + ms
-				+ ", amount=" + amount + "]";
+				+ ", product_name=" + product_name + ", price=" + price + ", money=" + money + ", amount=" + amount
+				+ "]";
 	}
 }

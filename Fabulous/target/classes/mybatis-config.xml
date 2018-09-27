@@ -8,6 +8,5 @@
 	<typeAlias type="com.fabulous.www.model.shop.dto.ProductDTO"
 	alias="productDto"/>
 	</typeAliases>
-
 </configuration>
 

@@ -15,11 +15,6 @@ function checkValue()
 		return false;
 	}
 	
-	/* if(form.idDuplication.value != "idCheck"){
-		alert("아이디 중복체크를 해주세요.");
-		return false;
-	} */
-	
 	if(!form.password.value){
 		alert("비밀번호를 입력하세요.");
 		return false;
@@ -61,10 +56,11 @@ function checkValue()
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-
+<br><br>
 <div class="container" id="main">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default content-main">
+      <h3>회원가입</h3>
           <form name="userInfo" method="post" action="${path}/member/insert.do" onsubmit="return checkValue()">
               <div class="form-group">
                   <label for="userId">사용자 아이디</label>

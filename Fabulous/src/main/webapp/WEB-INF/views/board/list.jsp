@@ -24,11 +24,12 @@ function view(bno){
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+<br><br>
 <div class="container" id="main">
    <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-      	<button type="button" id="btnWrite">글쓰기</button>
-      	${map.count}개의 게시물이 있습니다.
+      	<h3>후기 게시판</h3>
+      	<br>${map.count}개의 게시물이 있습니다.
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -39,7 +40,8 @@ function view(bno){
               <c:forEach var="row" items="${map.list}">
                 <tr>
                     <td>${row.bno}</td>
-					<td><a href="#" onclick="view('${row.bno}')">${row.title}</a></td>
+					<td><a href="#" onclick="view('${row.bno}')">${row.title}</a>
+					<c:if test="${row.cnt > 0}"><span style="color:red;">( ${row.cnt} )</span></c:if></td>
 					<td>${row.name}</td>
 					<td><fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td>${row.viewcnt}</td>
@@ -78,6 +80,11 @@ function view(bno){
 			</c:if>
 		</td>
 	</tr>
+	<tr>
+        <td colspan="5" align="right">
+           <button type="button" id="btnWrite" class="btn btn-success">글쓰기</button>
+        </td>
+    </tr>
 		</tbody>
           </table>
           <form name="form" method="post">

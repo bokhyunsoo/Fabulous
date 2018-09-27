@@ -28,8 +28,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public int count(int bno) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("reply.count", bno);
 	}
 
 	@Override
@@ -39,20 +38,17 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void update(ReplyDTO dto) {
-		// TODO Auto-generated method stub
-
+		sqlSession.update("reply.updateReply", dto);
 	}
 
 	@Override
 	public void delete(int rno) {
-		// TODO Auto-generated method stub
-
+		sqlSession.delete("reply.deleteReply", rno);
 	}
 
 	@Override
 	public ReplyDTO detail(int rno) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("reply.detailReply", rno);
 	}
 
 }

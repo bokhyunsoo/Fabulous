@@ -1,6 +1,9 @@
 package com.fabulous.www.controller.shop;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fabulous.www.model.shop.dto.ProductDTO;
+import com.fabulous.www.service.board.Pager;
 import com.fabulous.www.service.shop.ProductService;
 
 @Controller
@@ -21,11 +25,53 @@ public class ProductController {
 	@Inject // 의존관계 주입
 	ProductService productService;
 	
-	@RequestMapping("list.do") // 세부적인 url pattern
-	public ModelAndView list(ModelAndView mav) {
+	@RequestMapping("skewerlist.do") // 세부적인 url pattern
+	public ModelAndView list(@RequestParam(defaultValue="1") int curPage, ModelAndView mav) throws Exception {
+		int count = productService.skewercount();
+		// 페이지의 시작번호, 끝번호 계산
+		Pager pager = new Pager(count,curPage);
+		int start = pager.getPageBegin();
+		int end = pager.getPageEnd();
+		mav.setViewName("board/list");
+		Map<String,Object> map = new HashMap<>();
+		map.put("pager", pager);
+		mav.addObject("map", map);
+		mav.setViewName("/shop/skewer_list");
+		mav.addObject("list", productService.listSkewer(start, end));
+		return mav;
+	}
+	
+	@RequestMapping("doglist.do") // 세부적인 url pattern
+	public ModelAndView doglist(@RequestParam(defaultValue="1") int curPage, ModelAndView mav) throws Exception {
+		
+		int count = productService.dogcount();
+		// 페이지의 시작번호, 끝번호 계산
+		Pager pager = new Pager(count,curPage);
+		int start = pager.getPageBegin();
+		int end = pager.getPageEnd();
+		mav.setViewName("board/list");
+		Map<String,Object> map = new HashMap<>();
+		map.put("pager", pager);
+		mav.addObject("map", map);
+		mav.setViewName("/shop/dog_list");
+		mav.addObject("list", productService.listDog(start, end));
+		return mav;
 		// 포워딩할 뷰의 경로
-		mav.setViewName("/shop/product_list");
-		mav.addObject("list", productService.listProduct());
+	}
+	
+	@RequestMapping("sausagelist.do") // 세부적인 url pattern
+	public ModelAndView sausagelist(@RequestParam(defaultValue="1") int curPage, ModelAndView mav) throws Exception {
+		int count = productService.sausagecount();
+		// 페이지의 시작번호, 끝번호 계산
+		Pager pager = new Pager(count,curPage);
+		int start = pager.getPageBegin();
+		int end = pager.getPageEnd();
+		mav.setViewName("board/list");
+		Map<String,Object> map = new HashMap<>();
+		map.put("pager", pager);
+		mav.addObject("map", map);
+		mav.setViewName("/shop/sausage_list");
+		mav.addObject("list", productService.listSausage(start, end));
 		return mav;
 	}
 	
@@ -43,17 +89,53 @@ public class ProductController {
 		return "shop/product_write";
 	}
 	
- 	@RequestMapping("edit/{product_id}")
+	@RequestMapping("dogwrite.do")
+	public String dogwrite() {
+		return "shop/dog_write";
+	}
+	
+	@RequestMapping("skewerwrite.do")
+	public String skewerwrite() {
+		return "shop/skewer_write";
+	}
+	
+	@RequestMapping("sausagewrite.do")
+	public String sausagewrite() {
+		return "shop/sausage_write";
+	}
+	
+ 	@RequestMapping("skeweredit/{product_id}")
 	public ModelAndView edit(@PathVariable("product_id") int product_id, ModelAndView mav) {
 		// 뷰의 이름
-		mav.setViewName("/shop/product_edit");
+		mav.setViewName("/shop/skewer_edit");
 		// 뷰에 전달할 데이터
 		mav.addObject("dto", productService.detailProduct(product_id));
 		// product_edit.jsp로 포워딩
 		return mav;
 	}
- 	@RequestMapping("insert.do")
-	public String insert(@ModelAttribute ProductDTO dto) {
+ 	
+ 	@RequestMapping("dogedit/{product_id}")
+	public ModelAndView dogedit(@PathVariable("product_id") int product_id, ModelAndView mav) {
+		// 뷰의 이름
+		mav.setViewName("/shop/dog_edit");
+		// 뷰에 전달할 데이터
+		mav.addObject("dto", productService.detailProduct(product_id));
+		// product_edit.jsp로 포워딩
+		return mav;
+	}
+ 	
+ 	@RequestMapping("sausageedit/{product_id}")
+	public ModelAndView sausageedit(@PathVariable("product_id") int product_id, ModelAndView mav) {
+		// 뷰의 이름
+		mav.setViewName("/shop/sausage_edit");
+		// 뷰에 전달할 데이터
+		mav.addObject("dto", productService.detailProduct(product_id));
+		// product_edit.jsp로 포워딩
+		return mav;
+	}
+ 	
+ 	@RequestMapping(value={"skewerinsert.do", "doginsert.do", "sausageinsert.do"})
+	public String insert(@ModelAttribute ProductDTO dto, @RequestParam int v) {
  		
  		String description_filename = "-";
  		String picture_filename = "-";
@@ -83,11 +165,19 @@ public class ProductController {
 		// 상품 목록 페이지로 이동
 		
 		System.out.println(dto);
+//		System.out.println("여기 잘보자:"+value);
 		
-		return "redirect:/shop/product/list.do";
+		if(v == 1) {
+			return "redirect:/shop/product/doglist.do";	
+		} else if(v == 0) {
+			return "redirect:/shop/product/skewerlist.do";
+		} else {
+			return "redirect:/shop/product/sausagelist.do";
+		}
 	}
- 	@RequestMapping("update.do")
-	public String update(@ModelAttribute ProductDTO dto) {
+ 	
+ 	@RequestMapping(value= {"skewerupdate.do","dogupdate.do", "sausageupdate.do"})
+	public String update(@ModelAttribute ProductDTO dto, @RequestParam int v) {
  		System.out.println(dto);
  		String description_filename = "-";
  		String picture_filename = "-";
@@ -159,11 +249,17 @@ public class ProductController {
 		}
 		productService.updateProduct(dto);
 		// 상품 목록 페이지로 이동
- 		return "redirect:/shop/product/list.do";
+		if(v == 1) {
+			return "redirect:/shop/product/doglist.do";	
+		} else if(v == 0) {
+			return "redirect:/shop/product/skewerlist.do";
+		} else {
+			return "redirect:/shop/product/sausagelist.do";
+		}
 	}
 			
-	@RequestMapping("delete.do")
-	public String delete(@RequestParam int product_id) {
+	@RequestMapping(value={"skewerdelete.do","dogdelete.do", "sausagedelete.do"})
+	public String delete(@RequestParam int product_id,@RequestParam int v) {
 		// 상품코드에 해당하는 첨부파일 이름 조회
 		String picture_filename = productService.fileInfo(product_id);
 		System.out.println("첨부파일 이름:"+picture_filename);
@@ -179,6 +275,12 @@ public class ProductController {
 			}
 		}
 		productService.deleteProduct(product_id);
-		return "redirect:/shop/product/list.do";
+		if(v == 1) {
+			return "redirect:/shop/product/doglist.do";	
+		} else if(v == 0) {
+			return "redirect:/shop/product/skewerlist.do";
+		} else {
+			return "redirect:/shop/product/sausagelist.do";
+		}
 	}
 }

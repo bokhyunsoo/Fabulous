@@ -13,13 +13,13 @@ function checkValue()
 	inputForm = eval("document.loginInfo");
 	if(!inputForm.userId.value)
 	{
-		alert("아이디를 입력하세요");	
+		alert("아이디를 입력하세요.");	
 		inputForm.userId.focus();
 		return;
 	}
 	if(!inputForm.password.value)
 	{
-		alert("비밀번호를 입력하세요");	
+		alert("비밀번호를 입력하세요.");	
 		inputForm.password.focus();
 		return;
 	}
@@ -28,7 +28,7 @@ function checkValue()
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-
+<br><br>
 <div class="container" id="main">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default content-main">
@@ -47,7 +47,8 @@ function checkValue()
 		</script>
 		<div class="alert alert-danger" role="alert" style="color:red;">회원가입이 완료되었습니다. 로그인 해주세요.</div>
 	  </c:if>
-          <form name="loginInfo" method="post" action="${path}/member/login_check.do" onsubmit="return checkValue()">
+	  <h2 align="center">회원 로그인</h2>
+           <form name="loginInfo" method="post" action="${path}/member/login_check.do" onsubmit="return checkValue()">
               <div class="form-group">
                   <label for="userId">사용자 아이디</label>
                   <input class="form-control" id="userId" name="userId" placeholder="User ID">

@@ -5,18 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="product">
-	<select id="product_list" resultType="productDto">
-		select * from product order by product_name
-	</select>
-	
-	<select id="detail_product" resultType="productDto">
-		select * from product where product_id=#{product_id}
-	</select>
-	
+
 	<update id="update_product">
-		update product set product_name = #{product_name}, price = #{price},
-		description = #{description}, picture_url = #{picture_url}
-		where product_id = #{product_id}
+		update product set product_name = #{product_name}, price = #{price}, description = #{description}, picture_url = #{picture_url} where product_id = #{product_id}
 	</update>
 	
 	<insert id="insert">
@@ -33,6 +24,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="description_info" resultType="String">
 		select description from product where product_id=#{product_id}
+	</select>
+	
+	<select id="skewer_list" resultType="productDto">
+		<include refid="paging_header" />
+		select * from product where product_name like '%꼬치%' order by product_id desc
+		<include refid="paging_footer" />
+	</select>
+	
+	<select id="dog_list" resultType="productDto">
+		<include refid="paging_header" />
+		select * from product where product_name like '%핫도그%' order by product_id desc
+		<include refid="paging_footer" />
+	</select>
+	
+	<select id="sausage_list" resultType="productDto">
+		<include refid="paging_header" />
+		select * from product where product_name like '%소시지%' order by product_id desc
+		<include refid="paging_footer" />
+	</select>
+	
+	<select id="detail_product" resultType="productDto">
+		select * from product where product_id=#{product_id}
+	</select>
+	
+	<sql id="paging_header">
+		select * 
+		from (
+			select rownum as rn, A.*
+			from (
+	</sql>
+	
+	<sql id="paging_footer">
+		) A
+	) where rn between #{start} and #{end}
+	</sql>
+	
+	<select id="dogcount" resultType="int">
+		select count(*) from product where product_name like '%핫도그%'
+	</select>
+	
+	<select id="skewercount" resultType="int">
+		select count(*) from product where product_name like '%꼬치%'
+	</select>
+	
+	<select id="sausagecount" resultType="int">
+		select count(*) from product where product_name like '%소시지%'
 	</select>
 </mapper>
 

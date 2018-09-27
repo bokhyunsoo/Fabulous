@@ -7,7 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="board">
 	<select id="listAll" resultType="com.fabulous.www.model.board.dto.BoardDTO">
 		<include refid="paging_header" />
-		select bno, title, b.regdate, viewcnt, name
+		select bno, title, b.regdate, viewcnt, name,
+		(select count(*) from reply where bno=b.bno) cnt
 		from board b, member m <include refid="search"/>
 		order by bno desc, regdate desc
 		<include refid="paging_footer" />
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="view" resultType="com.fabulous.www.model.board.dto.BoardDTO">
 		select bno, title, b.regdate, content, viewcnt, name, writer
+		,(select count(*) from reply where bno=b.bno) cnt
 		from board b, member m where b.writer = m.userId and bno=#{bno}
 	</select>
 	

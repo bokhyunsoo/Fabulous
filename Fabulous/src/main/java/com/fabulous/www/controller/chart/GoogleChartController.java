@@ -18,12 +18,6 @@ public class GoogleChartController {
 	@Inject
 	GoogleChartService googleChartService;
 	
-	@RequestMapping("chart1.do")
-	public ModelAndView chart1() {
-		// views/chart/chart01.jsp로 포워딩
-		return new ModelAndView("chart/chart01");
-	}
-	
 	@RequestMapping("chart2.do")
 	public ModelAndView chart2() {
 		return new ModelAndView("chart/chart02");

@@ -33,7 +33,7 @@ public class MemberController {
 		boolean result = memberService.loginCheck(dto, session);
 		ModelAndView mav = new ModelAndView();
 		if (result) { // 로그인 성공
-			mav.setViewName("home"); // 뷰의 이름
+			mav.setViewName("redirect:/"); // 뷰의 이름
 		} else { // 로그인 실패
 			mav.setViewName("member/login");
 			mav.addObject("message", "error");

@@ -1,6 +1,7 @@
 package com.fabulous.www.service.admin;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String loginCheck(MemberDTO dto) {
 		return adminDao.loginCheck(dto);
+	}
+
+	@Override
+	public void logout(HttpSession session) {
+		// 세션 초기화
+		session.invalidate();
 	}
 
 }
